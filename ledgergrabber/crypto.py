@@ -10,6 +10,7 @@ def from_coinmarketcap(base='USD', as_of=None):
     req_results = requests.get(req_url, params={'convert': base}).json()
 
     quotes = [(x["symbol"], base, x[quote_field], as_of)
-              for x in req_results]
+              for x in req_results
+              if x[quote_field]]
 
     return quotes
