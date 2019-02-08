@@ -10,7 +10,7 @@ def from_fixer_io(base='USD', symbols=None, as_of=None):
 
     as_of = as_of or datetime.now()
 
-    req_results = requests.get("http://api.fixer.io/latest",
+    req_results = requests.get("https://api.exchangeratesapi.io/latest",
                                params=get_params).json()
 
     quotes = [(k, base, v, as_of) for k, v in req_results["rates"].items()]
