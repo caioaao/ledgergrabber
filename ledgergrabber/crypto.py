@@ -24,12 +24,14 @@ def from_coinmarketcap(base='USD', limit=200, as_of=None, api_key=None):
 
 
 def btc_from_foxbit(base='USD', as_of=None):
-    req_url = "https://api.blinktrade.com/api/v1/" + base + "/ticker"
+    req_url = (
+        "https://watcher.foxbit.com.br/api/Ticker?exchange=Foxbit&Pair=%sXBTC"
+        % base)
 
     as_of = as_of or datetime.now()
 
     req_results = requests.get(req_url).json()
 
-    val = (req_results['buy'] + req_results['sell']) / 2
+    val = (req_results['buyPrice'] + req_results['sellPrice']) / 2
 
     return ('BTC', base, val, as_of)
